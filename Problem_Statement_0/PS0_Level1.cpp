@@ -21,7 +21,7 @@ int main()
 
     // defining max and min...we use max = int min cuz we are setting the max value initially as the minimum value the code allows so as to make sure that the value user enters isnt less than the max value as set
 
-    int total = 0;
+    double total = 0;
     int max = INT_MIN;
     int min = INT_MAX;
 //taking input values of all the weights of containers by defining a temp variable to save storage space in the meantime
