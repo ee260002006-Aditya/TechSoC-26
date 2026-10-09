@@ -31,7 +31,7 @@ void isFainted(Bender& z){
     if(z.HP <= 0) {cout<<z.Name<<" fainted: true"<<endl;  }
     else {cout<<z.Name<<" fainted: false"<<endl; }
 }
-
+//display stats of player 1
 void displayStatsP1(Bender& x) {
     if(x.HP<=0) x.HP=0;
     cout<<x.Name<<" ("<<x.Element<<") - "<<"HP: "<<x.HP<<"/"<<x.MaxHP<<", Attack: "<<x.Attack<<", Defence: "<<x.Defence<<", Speed: "<<x.Speed<<endl;
