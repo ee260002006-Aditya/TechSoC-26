@@ -43,7 +43,7 @@ void displayStatsP1(Bender& x) {
      
     } }
 
-
+//display stats of player 2
 void displayStatsP2(Bender& y){cout<<endl<<endl;
     if(y.HP<=0) y.HP=0;
     cout<<y.Name<<" (" <<y.Element<< ") - "<< "HP: " <<y.HP<<"/"<<y.MaxHP<< ", Attack: " <<y.Attack<< ", Defence: " <<y.Defence<< ", Speed: " <<y.Speed<<endl;
@@ -55,6 +55,7 @@ void displayStatsP2(Bender& y){cout<<endl<<endl;
      
     }
 }
+//function used such that u choose the attacker
 
 void attack(Bender& x, Bender& y) {
     string attacker{};
@@ -63,12 +64,12 @@ void attack(Bender& x, Bender& y) {
     cin>>attacker;
     if(attacker == x.Name){
         cout<<"Enter the index of move you wish to use: ";
-        int A{};
+        int A{}; //suppose index of move they want to use
         cin>>A;
         int damageDealt{};
         for(int i=0; i<4; i++){
             if (A == i) {
-                damageDealt = round(double(x.GetMoves[i].Damage*x.Attack)/y.Defence);
+                damageDealt = round(double(x.GetMoves[i].Damage*x.Attack)/y.Defence); //this round fucntion was very new to me and its used to round off the damage dealt to an integral value, which the question demains, tho it can also be done by using simple division without writing the double since all are in integer, but that would give the GIF not the rounded value.
                 cout<<x.Name<<" used "<<x.GetMoves[i].Name<<"!"<<endl;
                 cout<<y.Name<<" took "<<damageDealt<<" damage!";
             };
@@ -77,7 +78,7 @@ void attack(Bender& x, Bender& y) {
         displayStatsP2(y);
         isFainted(y);
     }
-    else {
+    else { //atacker is y
          cout<<"Enter the index of move you wish to use: ";
         int A{};
         cin>>A;
@@ -97,7 +98,7 @@ void attack(Bender& x, Bender& y) {
 }
 
 int main(){
-    cout<<"Enter details for the first Bender: "<<endl;
+    cout<<"Enter details for the first Bender: "<<endl; //fully customizable benders available
     string s1{}, s2{};
    int h{}, a{}, d{}, s{}, m{};
     cout<<"Name: ";
@@ -112,7 +113,7 @@ int main(){
     cin >> d;
     cout<<"Speed: ";
     cin >> s;
-    //Moveset input 1
+    //Moveset input for bender 1
     cout<<"Input the Moveset of " <<s1<<endl;
     vector<MoveSet> Bender_1{};
         for(int i=0; i<4; i++){
@@ -127,7 +128,7 @@ int main(){
         }
 
     Bender x(s1 , s2 , h , a , d , s, Bender_1);
-    cout << "Enter details for the second Bender: "<<endl;
+    cout << "Enter details for the second Bender: "<<endl; //2nd bender
     string s3{}, s4{};
     int i{}, j{}, k{}, l{}, n{};
     cout<<"Name: ";
@@ -142,14 +143,14 @@ int main(){
     cin >> k;
     cout<<"Speed: ";
     cin >> l;
-//Moveset Input 2
+//Moveset Input for bender 2
     cout<<"Input the MoveSet of " <<s3<<endl;
     vector<MoveSet> Bender_2;
         for(int i=0; i<4; i++){
           
                 MoveSet x{};
                 cout<<"Enter Name of Move "<<i+1<<": ";
-                getline(cin>>ws, x.Name);
+                getline(cin>>ws, x.Name); //using getline cuz the name of moves are also a pair or triplet of strings, and cin does not accept inputs once a space appears and it treats it as the next cin,thus  showing unexpected behavior.
                 cout<<"Enter Damage of "<<x.Name<<": ";
                 cin>>x.Damage;
                 Bender_2.push_back(x);
