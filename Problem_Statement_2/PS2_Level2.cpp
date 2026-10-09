@@ -4,6 +4,7 @@
 #include <string>
 #include <cmath>
 using namespace std;
+//defined the moveset function
 struct MoveSet
 {
     string Name;
@@ -25,14 +26,14 @@ public:
     Bender(string n, string t, int h, int &a, int &d, int &sp, vector<MoveSet> m) : Name(n), Element(t), HP(h), Attack(a), Defence(d), Speed(sp), MaxHP(h), GetMoves(m) {}
 
     // "this" is the attacker, the defender is passed in
-    void attack(Bender &defender, int moveIndex)
+    void attack(Bender &defender, int moveIndex) //see this did not click to me while doing the level 1 but defining such a function came to my mind while doing level 2
     { 
-        if (moveIndex < 0 || moveIndex >= (int)GetMoves.size())
+        if (moveIndex < 0 || moveIndex >= GetMoves.size())
         {
             cout << "Invalid move index!";
             return;
         }
-        int damageDealt = round(double(GetMoves[moveIndex].Damage * Attack) / defender.Defence);
+        int damageDealt = round(double(GetMoves[moveIndex].Damage * Attack) / defender.Defence); //i couldnt update the damage dealt function completely cuz i couldnt implement the element wheel thus couldnt use the attack multiplier thing
         cout << Name << " used " << GetMoves[moveIndex].Name << "!" << endl;
         cout << defender.Name << " took " << damageDealt << " damage!";
         defender.HP -= damageDealt;
@@ -153,9 +154,9 @@ int main()
     displayStatsP1(x);
     displayStatsP2(y);
 
-    // main decides who attacks; the class only knows how an attack works
-    string whoAttacks{};
-    int idx{};
+    
+    string whoAttacks{}; //defined a string asking later on who will be the attacker
+    int idx{}; //index of move used
     cout << endl;
     cout << "Enter the Attacker: ";
     cin >> whoAttacks;
@@ -164,40 +165,35 @@ int main()
     cout << x.Name << " (" << x.Element <<", HP: " << x.HP << "/" << x.MaxHP<<") "<<"VS "<< y.Name << " (" << y.Element<< ", HP: " << y.HP << "/" << y.MaxHP << ") - " <<endl;
 for(int i = 0; i<1; i++){
     
-    if (x.Speed > y.Speed)
-    {
-        cout << x.Name << " goes first! " << "( Speed: " << x.Speed << " vs " << y.Speed << endl;
+    if (x.Speed > y.Speed) {
+     cout << x.Name << " goes first! " << "( Speed: " << x.Speed << " vs " << y.Speed << endl;
         int p{};
         cin>>p;
-        x.attack(y,p);
-    }
+        x.attack(y,p);}
 
-     if (y.Speed > x.Speed)
-    {
+     if (y.Speed > x.Speed){
         cout << y.Name << " goes first! " << "( Speed: " << y.Speed << " vs " << x.Speed << endl;
         int p{};
         cin>>p;
         y.attack(x,p);
     }
-}
-while(x.HP !=0 && y.HP != 0){
+   }
+while(x.HP !=0 && y.HP != 0){ //theres probably some bug here since im not checking negative but i am doing hp = 0 if it's negative  in attack function so i dont think theres a need here 
     string nextAttack;
     if(whoAttacks == x.Name) nextAttack = y.Name;
     else nextAttack = x.Name;
     cout << "Enter the index of move you wish to use: ";
     cin >> idx;
-    if (whoAttacks == x.Name)
-    {
+    if (whoAttacks == x.Name){
         x.attack(y, idx);
         displayStatsP2(y);
         isFainted(y);
-    }
-    else if (whoAttacks == y.Name)
-    {
+        }
+    else if (whoAttacks == y.Name){
         y.attack(x, idx);
         displayStatsP1(x);
         isFainted(x);
-    }
+         }
     else
         {cout << "No bender named " << whoAttacks <<"exists"<< endl;}
     whoAttacks = nextAttack;
